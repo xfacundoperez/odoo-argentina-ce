@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="afip_footer" name="afip footer">
-        <div class="row" t-if="'afip_barcode' in o and o.afip_barcode and 'afip_auth_code' in o and o.afip_auth_code and 'afip_auth_code_due' in o and o.afip_auth_code_due">
-            <div>
-                <img alt="Barcode" style="height:80px" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;humanreadable=1' % ('I2of5', o.afip_barcode)" t-if="o.afip_barcode"/>
+        <div t-if="o.afip_auth_code">
+            <div class="row" t-if="'afip_barcode' in o and o.afip_barcode and 'afip_auth_code' in o and 'afip_auth_code_due' in o and o.afip_auth_code_due">
+                <div class="col-12 col-md-7 p-1">
+                    <img alt="Barcode" style="height:80px" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;humanreadable=1' % ('I2of5', o.afip_barcode)" t-if="o.afip_barcode" />
+                </div>
+                <div class="col-12 col-md-5 px-3 px-md-1 py-1">
+                    <div>CAE:
+                        <span t-field="o.afip_auth_code" /></div>
+                    <div>CAE Due Date:
+                        <span t-field="o.afip_auth_code_due" /></div>
+                </div>
             </div>
-            <div>
-                <div>CAE: 
-                    <span t-field="o.afip_auth_code"/></div>
-                <div>CAE Due Date:
-                    <span t-field="o.afip_auth_code_due"/></div>
+        </div>
+        <div t-else="">
+            <div class="w-100 text-center">
+                <h3>Documento no valido como factura</h3>
             </div>
         </div>
     </template>
