@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="afip_footer" name="afip footer">
-        <div class="row" t-if="'afip_barcode' in o and o.afip_barcode and 'afip_auth_code' in o and o.afip_auth_code and 'afip_auth_code_due' in o and o.afip_auth_code_due">
+        <div class="row" t-if="'afip_auth_code' in o and o.afip_auth_code and 'afip_barcode' in o and o.afip_barcode and 'afip_auth_code_due' in o and o.afip_auth_code_due">
             <div>
                 <img alt="Barcode" style="height:80px" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;humanreadable=1' % ('I2of5', o.afip_barcode)" t-if="o.afip_barcode"/>
             </div>
             <div>
-                <div>CAE: 
+                <div>Nro. CAE: 
                     <span t-field="o.afip_auth_code"/></div>
-                <div>CAE Due Date:
+                <div>Vto. CAE:
                     <span t-field="o.afip_auth_code_due"/></div>
             </div>
         </div>
     </template>
     <template id="latam_report_invoice_document" inherit_id="l10n_latam_invoice_document.report_invoice_document">
-        <xpath expr="//h2[@t-if='o.l10n_latam_document_type_id.report_name']" position="replace">
-            <div class="row" t-if="o.l10n_latam_document_type_id.report_name">
-                <div class="col-4">
-                </div>
-                <div class="col-2 text-center" t-if="o.l10n_latam_document_type_id.report_name">
-                    <div class="card" style="margin:0px;">
-                        <div class="card-header" style="font-size: 48px;padding:0px;">
-                            <span t-field="o.l10n_latam_document_type_id.l10n_ar_letter"/>
-                        </div>
-                        <div class="card-body" style="height: 20px;padding:0px;">cod.             
-                            <span t-field="o.l10n_latam_document_type_id.code"/></div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <h2>
-                        <span t-field="o.l10n_latam_document_number"/>
-                    </h2>
-                    <div t-field="o.l10n_latam_document_type_id.report_name"/>
-                </div>
-            </div>
-        </xpath>
+        <xpath expr="//h2[@t-if='o.l10n_latam_document_type_id.report_name']" position="replace" />
     </template>
     <template id="external_layout_standard" inherit_id="web.external_layout_standard">
         <xpath expr="//div[contains(@t-attf-class, 'footer')]/div" position="before">
